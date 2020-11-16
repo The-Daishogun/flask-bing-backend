@@ -8,7 +8,12 @@ app = Flask(__name__)
 def index():
     day = request.args.get("day", default=1, type=int)
     day = day if day <= 8 else 1
-    return bg.get_img_url(day=day)
+    response = (
+        {"url": bg.get_img_url(day=day)}
+        if request.content_type == "application/json"
+        else bg.get_img_url(day=day)
+    )
+    return response
 
 
 if __name__ == "__main__":
