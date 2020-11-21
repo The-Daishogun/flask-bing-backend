@@ -1,8 +1,10 @@
 from flask import Flask, request, send_file, url_for
+from flask_cors import CORS
 from backgroundify import Backgroundify
 import os
 
 app = Flask(__name__)
+cors = CORS(app)
 
 # can get pictures of previous days (up to 8 days bc of Bing restrictions).
 @app.route("/<int:days>")
