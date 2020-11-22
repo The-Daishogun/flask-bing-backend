@@ -37,12 +37,17 @@ def api(days):
     bg.save_files()
     for i in range(days):
         response[i] = {
-            "url": "localhost:5000"
+            "url": "http://localhost:5000"
             + url_for("static", filename="pic/" + bg.imgs[i]["filename"]),
             "title": bg.imgs[i]["title"],
             "copyright": bg.imgs[i]["copyright"],
         }
     return response
+
+
+@app.route("/static/pic/<filename>")
+def serve(filename):
+    return send_file("static/pic/" + filename + ".jpg")
 
 
 if __name__ == "__main__":
